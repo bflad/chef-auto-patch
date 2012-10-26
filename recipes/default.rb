@@ -20,13 +20,16 @@ include_recipe "cron"
 package "yum-plugin-downloadonly" if node["platform_family"] = "rhel"
 
 if node["auto-patch"]["prep"]["weekly"]
-  node["auto-patch"]["prep"]["weekday"] = AutoPatch.weekday(node["auto-patch"]["prep"]["weekly"])
   node["auto-patch"]["prep"]["day"] = "*"
+  node["auto-patch"]["prep"]["month"] = "*"
+  node["auto-patch"]["prep"]["weekday"] = AutoPatch.weekday(node["auto-patch"]["prep"]["weekly"])
 elsif node["auto-patch"]["prep"]["monthly"]
+  next_date = AutoPatch.next_monthly_patch_prep_date
+  node["auto-patch"]["prep"]["day"] = next_date.day
+  node["auto-patch"]["prep"]["month"] = next_date.month
   node["auto-patch"]["prep"]["weekday"] = "*"
-  node["auto-patch"]["prep"]["day"] = AutoPatch.day(node["auto-patch"]["prep"]["monthly"])
 else
-  Chef::Application.fatal!("Missing auto-patch-prep monthly or weekly specification.")
+  Chef::Application.fatal!("Missing auto-patch prep monthly or weekly specification.")
 end
 
 template "/usr/local/sbin/auto-patch-prep" do
@@ -41,16 +44,20 @@ cron_d "auto-patch-prep" do
   minute node["auto-patch"]["prep"]["minute"]
   weekday node["auto-patch"]["prep"]["weekday"]
   day node["auto-patch"]["prep"]["day"]
+  month node["auto-patch"]["prep"]["month"]
   command "/usr/local/sbin/auto-patch-prep"
   action :delete if node["auto-patch"]["disable"]
 end
 
 if node["auto-patch"]["weekly"]
-  node["auto-patch"]["weekday"] = AutoPatch.weekday(node["auto-patch"]["weekly"])
   node["auto-patch"]["day"] = "*"
+  node["auto-patch"]["month"] = "*"
+  node["auto-patch"]["weekday"] = AutoPatch.weekday(node["auto-patch"]["weekly"])
 elsif node["auto-patch"]["monthly"]
+  next_date = AutoPatch.next_monthly_patch_date
+  node["auto-patch"]["day"] = next_date.day
+  node["auto-patch"]["month"] = next_date.month
   node["auto-patch"]["weekday"] = "*"
-  node["auto-patch"]["day"] = AutoPatch.day(node["auto-patch"]["monthly"])
 else
   Chef::Application.fatal!("Missing auto-patch monthly or weekly specification.")
 end
@@ -67,6 +74,7 @@ cron_d "auto-patch" do
   minute node["auto-patch"]["minute"]
   weekday node["auto-patch"]["weekday"]
   day node["auto-patch"]["day"]
+  month node["auto-patch"]["month"]
   command "/usr/local/sbin/auto-patch"
   action :delete if node["auto-patch"]["prep"]["disable"]
 end

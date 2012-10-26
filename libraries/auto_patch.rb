@@ -21,32 +21,67 @@ class Chef::Recipe::AutoPatch
   WEEKS = %w{ first second third fourth }
   WEEKDAYS = %w{ sunday monday tuesday wednesday thursday friday saturday }
 
-  def self.day(monthly_specifier)
+  def self.monthly_date(year,month,monthly_specifier)
+    Date.new(year,month,monthly_day(year,month,monthly_specifier))
+  end
+
+  def self.monthly_day(year,month,monthly_specifier)
     week,weekly_specifier = monthly_specifier.split(" ")
     week.lower!
     weekly_specifier.lower!
     Chef::Application.fatal!("Unknown week specified.") unless WEEKS.include?(week)
 
-    current_time = Time.now
-    patch_day = monthly_day(current_time.year,current_time.month,week,weekly_specifier)
-
-    if current_time > Time.new(current_time.year,current_time.month,patch_day,current_time.hour,current_time.minute)
-      if current_time.month == 12
-        patch_day = monthly_day(current_time.year+1,1,week,weekly_specifier)
-      else
-        patch_day = monthly_day(current_time.year,current_time.month+1,week,weekly_specifier)
-      end
-    end
-
-    patch_day
-  end
-
-  def self.monthly_day(year,month,week,weekly_specifier)
     first_day_occurance = 1
     while weekday(weekly_specifier) != Date.new(year,month,first_day_occurance).wday
       first_day_occurance = first_day_occurance + 1
     end
     first_day_occurance * ( WEEKS.index(week) + 1 )
+  end
+
+  def self.next_monthly_patch_date
+    current_time = Time.now
+    current_patch_time = Time.new(
+      current_time.year,
+      current_time.month,
+      monthly_day(current_time.year,current_time.month,@node["auto-patch"]["monthly"]),
+      @node["auto-patch"]["hour"],
+      @node["auto-patch"]["minute"]
+    )
+
+    if current_time > current_patch_time
+      if current_time.month == 12
+        date = monthly_date(current_time.year+1,1,@node["auto-patch"]["monthly"])
+      else
+        date = monthly_date(current_time.year,current_time.month+1,@node["auto-patch"]["monthly"])
+      end
+    else
+      date = current_patch_time
+    end
+
+    date
+  end
+
+  def self.next_monthly_patch_prep_date
+    current_time = Time.now
+    current_patch_prep_time = Time.new(
+      current_time.year,
+      current_time.month,
+      monthly_day(current_time.year,current_time.month,@node["auto-patch"]["prep"]["monthly"]),
+      @node["auto-patch"]["prep"]["hour"],
+      @node["auto-patch"]["prep"]["minute"]
+    )
+
+    if current_time > current_patch_prep_time
+      if current_time.month == 12
+        date = monthly_date(current_time.year+1,1,@node["auto-patch"]["prep"]["monthly"])
+      else
+        date = monthly_date(current_time.year,current_time.month+1,@node["auto-patch"]["prep"]["monthly"])
+      end
+    else
+      date = current_patch_time
+    end
+
+    date
   end
 
   def self.weekday(weekly_specifier)
