@@ -1,15 +1,15 @@
+name              "auto-patch"
 maintainer        "The Wharton School - The University of Pennsylvania"
 maintainer_email  "chef-admins@wharton.upenn.edu"
 license           "Apache 2.0"
-description       "A cool description."
-version           "0.1.0"
-recipe            "template-cookbook", "Short description of template-cookbook default recipe."
-recipe            "template-cookbook::alternate", "Short description of template-cookbook::alternate recipe."
+description       "Configures node for automatic patching."
+version           "0.0.1"
+recipe            "auto-patch", "Configures node for automatic patching."
 
-%w{ apache2 logrotate }.each do |d|
+%w{ cron }.each do |d|
   depends d
 end
 
-%w{ redhat ubuntu }.each do |os|
+%w{ amazon centos debian fedora redhat scientific ubuntu }.each do |os|
   supports os
 end
