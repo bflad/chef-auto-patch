@@ -1,6 +1,6 @@
 name              "auto-patch"
-maintainer        "The Wharton School - The University of Pennsylvania"
-maintainer_email  "chef-admins@wharton.upenn.edu"
+maintainer        "Brian Flad"
+maintainer_email  "bflad@wharton.upenn.edu"
 license           "Apache 2.0"
 description       "Configures node for automatic patching."
 version           "0.0.1"
