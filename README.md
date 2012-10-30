@@ -21,16 +21,16 @@ patch process and can help guarantee meeting patching timeframes.
 ## Attributes
 
 * `node["auto-patch"]["disable"]` - defaults to false
-* `node["auto-patch"]["hour"]` - defaults to "3"
-* `node["auto-patch"]["minute"]` - defaults to "0"
+* `node["auto-patch"]["hour"]` - defaults to 3
+* `node["auto-patch"]["minute"]` - defaults to 0
 * `node["auto-patch"]["monthly"]` - auto patching occurs once a month on the
   corresponding textual week number ("first","second",etc) and weekday
   ("monday","tuesday",etc), overridden by `node["auto-patch"]["weekly"]`,
   defaults to "first sunday"
 * `node["auto-patch"]["reboot"]` - reboot automatically after patching, defaults
   to true
-* `node["auto-patch"]["splay"]` - amount of random delay before beginning,
-  defaults to "300"
+* `node["auto-patch"]["splay"]` - seconds of random delay before beginning,
+  defaults to 300
 * `node["auto-patch"]["weekly"]` - auto patching occurs once a week on the
   corresponding textual weekday ("monday","tuesday",etc), overrides
   `node["auto-patch"]["monthly"]`, defaults to nil
@@ -40,14 +40,14 @@ patch process and can help guarantee meeting patching timeframes.
 * `node["auto-patch"]["prep"]["clean"]` - cleans updater cache files, defaults
   to true
 * `node["auto-patch"]["prep"]["disable"]` - defaults to true
-* `node["auto-patch"]["prep"]["hour"]` - defaults to "2"
-* `node["auto-patch"]["prep"]["minute"]` - defaults to "0"
+* `node["auto-patch"]["prep"]["hour"]` - defaults to 2
+* `node["auto-patch"]["prep"]["minute"]` - defaults to 0
 * `node["auto-patch"]["prep"]["monthly"]` - auto patching prep occurs once a
   month on the corresponding textual week number ("first","second",etc) and
   weekday ("monday","tuesday",etc), overridden by
   `node["auto-patch"]["prep"]["weekly"]`, defaults to "first sunday"
-* `node["auto-patch"]["prep"]["splay"]` - amount of random delay before
-  beginning, defaults to "1800"
+* `node["auto-patch"]["prep"]["splay"]` - seconds of random delay before
+  beginning, defaults to 1800
 * `node["auto-patch"]["prep"]["weekly"]` - auto patching prep occurs once a week
   on the corresponding textual weekday ("monday","tuesday",etc), overrides
   `node["auto-patch"]["prep"]["monthly"]`, defaults to nil
@@ -85,7 +85,7 @@ and specify some base information first:
       "monthly" => "fourth wednesday",
       "prep" => {
         "disable" => false,
-        "hour" => "7",
+        "hour" => 7,
         "monthly" => "fourth wednesday"
       }
     }
@@ -96,7 +96,7 @@ Example role that then could be added to 8am nodes:
     description "Role for automatically patching nodes at 8am on patch day."
     default_attributes(
       "auto-patch" => {
-        "hour" => "8"
+        "hour" => 8
       }
     )
     run_list(
@@ -109,7 +109,7 @@ Example role that then could be added to 10pm nodes:
     description "Role for automatically patching nodes at 10pm on patch day."
     default_attributes(
       "auto-patch" => {
-        "hour" => "22"
+        "hour" => 22
       }
     )
     run_list(

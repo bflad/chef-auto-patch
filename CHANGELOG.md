@@ -1,3 +1,7 @@
+## v0.1.2
+
+* Convert unnecessary String attributes to Fixnum
+
 ## v0.1.1
 
 * Only install yum-plugin-downloadonly if auto-patch prep is enabled.
