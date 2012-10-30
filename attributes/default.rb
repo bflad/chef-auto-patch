@@ -24,7 +24,7 @@ default["auto-patch"]["splay"] = "300"
 default["auto-patch"]["weekly"] = nil
 
 default["auto-patch"]["prep"]["clean"] = true
-default["auto-patch"]["prep"]["disable"] = false
+default["auto-patch"]["prep"]["disable"] = true
 default["auto-patch"]["prep"]["hour"] = "2"
 default["auto-patch"]["prep"]["minute"] = "0"
 default["auto-patch"]["prep"]["monthly"] = "first sunday"

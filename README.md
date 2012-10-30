@@ -39,7 +39,7 @@ patch process and can help guarantee meeting patching timeframes.
 
 * `node["auto-patch"]["prep"]["clean"]` - cleans updater cache files, defaults
   to true
-* `node["auto-patch"]["prep"]["disable"]` - defaults to false
+* `node["auto-patch"]["prep"]["disable"]` - defaults to true
 * `node["auto-patch"]["prep"]["hour"]` - defaults to "2"
 * `node["auto-patch"]["prep"]["minute"]` - defaults to "0"
 * `node["auto-patch"]["prep"]["monthly"]` - auto patching prep occurs once a
@@ -84,6 +84,7 @@ and specify some base information first:
     "auto-patch" => {
       "monthly" => "fourth wednesday",
       "prep" => {
+        "disable" => false,
         "hour" => "7",
         "monthly" => "fourth wednesday"
       }
