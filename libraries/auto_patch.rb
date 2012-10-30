@@ -38,44 +38,21 @@ class Chef::Recipe::AutoPatch
     first_day_occurance * ( WEEKS.index(week) + 1 )
   end
 
-  def self.next_monthly_patch_date(node)
+  def self.next_monthly_date(monthly_specifier,hour,minute)
     current_time = Time.now
     current_patch_time = Time.new(
       current_time.year,
       current_time.month,
-      monthly_day(current_time.year,current_time.month,node["auto-patch"]["monthly"]),
-      node["auto-patch"]["hour"],
-      node["auto-patch"]["minute"]
+      monthly_day(current_time.year,current_time.month,monthly_specifier),
+      hour,
+      minute
     )
 
     if current_time > current_patch_time
       if current_time.month == 12
-        date = monthly_date(current_time.year+1,1,node["auto-patch"]["monthly"])
+        date = monthly_date(current_time.year+1,1,monthly_specifier)
       else
-        date = monthly_date(current_time.year,current_time.month+1,node["auto-patch"]["monthly"])
-      end
-    else
-      date = current_patch_time
-    end
-
-    date
-  end
-
-  def self.next_monthly_patch_prep_date(node)
-    current_time = Time.now
-    current_patch_prep_time = Time.new(
-      current_time.year,
-      current_time.month,
-      monthly_day(current_time.year,current_time.month,node["auto-patch"]["prep"]["monthly"]),
-      node["auto-patch"]["prep"]["hour"],
-      node["auto-patch"]["prep"]["minute"]
-    )
-
-    if current_time > current_patch_prep_time
-      if current_time.month == 12
-        date = monthly_date(current_time.year+1,1,node["auto-patch"]["prep"]["monthly"])
-      else
-        date = monthly_date(current_time.year,current_time.month+1,node["auto-patch"]["prep"]["monthly"])
+        date = monthly_date(current_time.year,current_time.month+1,monthly_specifier)
       end
     else
       date = current_patch_time
