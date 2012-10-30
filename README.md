@@ -116,6 +116,12 @@ Example role that then could be added to 10pm nodes:
       "recipe[auto-patch]"
     )
 
+### Disabling automatic patching
+
+* Specify `node["auto-patch"]["disable"]` to true
+* If necessary, specify `node["auto-patch"]["disable"]` to true
+* Run chef-client on your node
+
 ## Contributing
 
 Please use standard Github issues/pull requests.
