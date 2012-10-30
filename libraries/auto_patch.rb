@@ -27,8 +27,8 @@ class Chef::Recipe::AutoPatch
 
   def self.monthly_day(year,month,monthly_specifier)
     week,weekly_specifier = monthly_specifier.split(" ")
-    week.lower!
-    weekly_specifier.lower!
+    week.downcase!
+    weekly_specifier.downcase!
     Chef::Application.fatal!("Unknown week specified.") unless WEEKS.include?(week)
 
     first_day_occurance = 1
