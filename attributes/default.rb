@@ -20,7 +20,7 @@ default["auto-patch"]["hour"] = 3
 default["auto-patch"]["minute"] = 0
 default["auto-patch"]["monthly"] = "first sunday"
 default["auto-patch"]["reboot"] = true
-default["auto-patch"]["splay"] = 300
+default["auto-patch"]["splay"] = 0
 default["auto-patch"]["weekly"] = nil
 
 default["auto-patch"]["prep"]["clean"] = true

@@ -1,3 +1,8 @@
+## v0.1.4
+
+* Defaulted auto-patch splay to 0 since setting is only for large numbers of
+  nodes
+
 ## v0.1.3
 
 * Refactored next_monthly_*_date functions into next_monthly_date

@@ -30,7 +30,7 @@ patch process and can help guarantee meeting patching timeframes.
 * `node["auto-patch"]["reboot"]` - reboot automatically after patching, defaults
   to true
 * `node["auto-patch"]["splay"]` - seconds of random delay before beginning,
-  defaults to 300
+  defaults to 0
 * `node["auto-patch"]["weekly"]` - auto patching occurs once a week on the
   corresponding textual weekday ("monday","tuesday",etc), overrides
   `node["auto-patch"]["monthly"]`, defaults to nil
@@ -70,6 +70,15 @@ patch process and can help guarantee meeting patching timeframes.
 Just use the `node["auto-patch"]["weekly"]` attribute to override the monthly
 setting. Don't forget to add appropriate `node["auto-patch"]["prep"]["weekly"]`
 if you're using automatic patch preparation.
+
+### Automatic patching of large numbers of nodes
+
+If you're auto patching many nodes at once, you have two attributes you can
+optionally add to prevent denial of service against your network, update
+server(s), and resources:
+* Adding `node["auto-patch"]["splay"]`
+* Setting `node["auto-patch"]["prep"]["disable"]` to false (along with setting
+  associated prep attributes to meet your patch cycle)
 
 ### Using roles to specify auto patching groups
 
