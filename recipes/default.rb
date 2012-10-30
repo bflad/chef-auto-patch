@@ -25,7 +25,7 @@ if node["auto-patch"]["prep"]["weekly"]
   node["auto-patch"]["prep"]["weekday"] = AutoPatch.weekday(node["auto-patch"]["prep"]["weekly"])
   Chef::Log.info("Auto patch prep scheduled weekly on #{node["auto-patch"]["weekly"]} at #{node["auto-patch"]["hour"]}:#{node["auto-patch"]["minute"]}")
 elsif node["auto-patch"]["prep"]["monthly"]
-  next_date = AutoPatch.next_monthly_patch_prep_date
+  next_date = AutoPatch.next_monthly_patch_prep_date(node)
   node["auto-patch"]["prep"]["day"] = next_date.day
   node["auto-patch"]["prep"]["month"] = next_date.month
   node["auto-patch"]["prep"]["weekday"] = "*"
@@ -57,7 +57,7 @@ if node["auto-patch"]["weekly"]
   node["auto-patch"]["weekday"] = AutoPatch.weekday(node["auto-patch"]["weekly"])
   Chef::Log.info("Auto patch scheduled weekly on #{node["auto-patch"]["weekly"]} at #{node["auto-patch"]["hour"]}:#{node["auto-patch"]["minute"]}")
 elsif node["auto-patch"]["monthly"]
-  next_date = AutoPatch.next_monthly_patch_date
+  next_date = AutoPatch.next_monthly_patch_date(node)
   node["auto-patch"]["day"] = next_date.day
   node["auto-patch"]["month"] = next_date.month
   node["auto-patch"]["weekday"] = "*"
