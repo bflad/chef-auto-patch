@@ -17,9 +17,9 @@
 
 include_recipe "cron"
 
-package "yum-plugin-downloadonly" if node["platform_family"] = "rhel"
-
 unless node["auto-patch"]["prep"]["disable"]
+  package "yum-plugin-downloadonly" if node["platform_family"] = "rhel"
+
   if node["auto-patch"]["prep"]["weekly"]
     node["auto-patch"]["prep"]["day"] = "*"
     node["auto-patch"]["prep"]["month"] = "*"
