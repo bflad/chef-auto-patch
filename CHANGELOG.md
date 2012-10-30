@@ -1,3 +1,7 @@
+## v0.1.3
+
+* Refactored next_monthly_*_date functions into next_monthly_date
+
 ## v0.1.2
 
 * Convert unnecessary String attributes to Fixnum
