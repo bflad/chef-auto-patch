@@ -5,7 +5,7 @@
 # Local modifications will be overwritten by Chef.
 #
 
-<% if node["auto-patch"]["prep"]["splay"] > 0 -%>
+<% if node["auto-patch"]["prep"]["splay"].to_i > 0 -%>
 sleep $[ ( $RANDOM % <%= node["auto-patch"]["prep"]["splay"] %> )  + 1 ]s
 <% end -%>
 
