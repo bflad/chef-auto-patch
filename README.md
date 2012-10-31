@@ -2,10 +2,16 @@
 
 ## Description
 
-Chef Cookbook for automatically patching nodes. Handles weekly or monthly
-patching routines with or without node splay. Can automatically prepare node for
-true patch window by cleaning and pre-downloading packages, which speeds up
-patch process and can help guarantee meeting patching timeframes.
+Chef Cookbook for automatically patching nodes on a specific schedule (weekday,
+hour, and minute). Handles weekly or monthly patching routines with or without
+node splay for large environments. Can automatically prepare node for true patch
+window by cleaning and pre-downloading packages, which speeds up patch process
+and can help guarantee meeting patching timeframes.
+
+If you're looking for daily upgrades on Ubuntu, check out the
+[unattended-upgrades package](https://help.ubuntu.com/12.04/serverguide/automatic-updates.html)
+and a [corresponding cookbook](https://github.com/firstbanco/chef-unattended-upgrades).
+(/ht [@hectcastro](https://github.com/hectcastro) for this information).
 
 ## Requirements
 
