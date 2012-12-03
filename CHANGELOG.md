@@ -1,3 +1,7 @@
+## v0.1.6
+
+* Fixed typo in default recipe for platform_family detection
+
 ## v0.1.5
 
 * Fixes in default recipe for WARN: Setting attributes without specifying a precedence is deprecated
