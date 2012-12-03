@@ -1,3 +1,7 @@
+## v0.1.5
+
+* Fixes in default recipe for WARN: Setting attributes without specifying a precedence is deprecated
+
 ## v0.1.4
 
 * Defaulted auto-patch splay to 0 since setting is only for large numbers of

@@ -3,7 +3,7 @@ maintainer        "Brian Flad"
 maintainer_email  "bflad@wharton.upenn.edu"
 license           "Apache 2.0"
 description       "Configures node for automatic patching."
-version           "0.1.4"
+version           "0.1.5"
 recipe            "auto-patch", "Configures node for automatic patching."
 
 %w{ cron }.each do |d|
