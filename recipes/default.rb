@@ -48,7 +48,6 @@ template "/usr/local/sbin/auto-patch-prep" do
 end
 
 cron_d "auto-patch-prep" do
-  cookbook "cron"
   hour node["auto-patch"]["prep"]["hour"]
   minute node["auto-patch"]["prep"]["minute"]
   weekday node["auto-patch"]["prep"]["weekday"]
@@ -87,7 +86,6 @@ template "/usr/local/sbin/auto-patch" do
 end
 
 cron_d "auto-patch" do
-  cookbook "cron"
   hour node["auto-patch"]["hour"]
   minute node["auto-patch"]["minute"]
   weekday node["auto-patch"]["weekday"]
