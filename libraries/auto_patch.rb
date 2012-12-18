@@ -35,7 +35,7 @@ class Chef::Recipe::AutoPatch
     while weekday(weekly_specifier) != Date.new(year,month,first_day_occurance).wday
       first_day_occurance = first_day_occurance + 1
     end
-    first_day_occurance * ( WEEKS.index(week) + 1 )
+    first_day_occurance + ( WEEKS.index(week) * 7 )
   end
 
   def self.next_monthly_date(monthly_specifier,hour,minute)

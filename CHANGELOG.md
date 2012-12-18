@@ -1,3 +1,7 @@
+## v0.1.8 ##
+
+* Fixed day of month logic for later week specifications
+
 ## v0.1.7 ##
 
 * Removed cookbook attribute from cron_d resources since was fixed in [cron@1.2.2](https://github.com/opscode-cookbooks/cron/compare/1.2.0...1.2.2)
