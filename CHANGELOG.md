@@ -1,3 +1,7 @@
+## v0.1.9 ##
+
+* RHEL 5 support with correct package name
+
 ## v0.1.8 ##
 
 * Fixed day of month logic for later week specifications

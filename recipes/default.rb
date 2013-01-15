@@ -18,7 +18,13 @@
 include_recipe "cron"
 
 unless node["auto-patch"]["prep"]["disable"]
-  package "yum-plugin-downloadonly" if node["platform_family"] == "rhel"
+  if node["platform_family"] == "rhel"
+    if node["platform_version"].to_f >= 6.0
+      package "yum-plugin-downloadonly"
+    else
+      package "yum-downloadonly"
+    end
+  end
 
   if node["auto-patch"]["prep"]["weekly"]
     node.set["auto-patch"]["prep"]["day"] = "*"
