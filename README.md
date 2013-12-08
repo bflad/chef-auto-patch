@@ -137,15 +137,31 @@ Example role that then could be added to 10pm nodes:
 * If necessary, specify `node["auto-patch"]["prep"]["disable"]` to true
 * Run chef-client on your node
 
+## Testing and Development
+
+Here's how you can quickly get testing or developing against the cookbook thanks to [Vagrant](http://vagrantup.com/) and [Berkshelf](http://berkshelf.com/).
+
+    vagrant plugin install vagrant-berkshelf
+    vagrant plugin install vagrant-cachier
+    vagrant plugin install vagrant-omnibus
+    git clone git://github.com/bflad/chef-auto-patch.git
+    cd chef-auto-patch
+    vagrant up BOX # BOX being centos5, centos6, debian7, fedora18, fedora19, fedora20, freebsd9, ubuntu1204, ubuntu1210, ubuntu1304, or ubuntu1310
+
+You can then SSH into the running VM using the `vagrant ssh BOX` # BOX being centos6 or ubuntu1204 command.
+The VM can easily be stopped and deleted with the `vagrant destroy`
+command. Please see the official [Vagrant documentation](http://docs.vagrantup.com/v2/cli/index.html)
+for a more in depth explanation of available commands.
+
 ## Contributing
 
 Please use standard Github issues/pull requests.
 
 ## License and Author
       
-Author:: Brian Flad (<bflad@wharton.upenn.edu>)
+Author:: Brian Flad (<bflad417@gmail.com>)
 
-Copyright:: 2012
+Copyright:: 2012-2013
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
