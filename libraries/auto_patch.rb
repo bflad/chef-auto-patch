@@ -19,8 +19,8 @@ require 'date'
 
 # auto-patch helper logic
 class Chef::Recipe::AutoPatch
-  WEEKS = %w{ first second third fourth }
-  WEEKDAYS = %w{ sunday monday tuesday wednesday thursday friday saturday }
+  WEEKS = %w(first second third fourth)
+  WEEKDAYS = %w(sunday monday tuesday wednesday thursday friday saturday)
 
   def self.monthly_date(year, month, monthly_specifier)
     Date.new(year, month, monthly_day(year, month, monthly_specifier))

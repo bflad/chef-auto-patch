@@ -3,5 +3,5 @@ site :opscode
 metadata
 
 group :integration do
-  cookbook "minitest-handler"
+  cookbook 'minitest-handler'
 end
