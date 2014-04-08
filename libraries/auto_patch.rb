@@ -18,52 +18,59 @@
 require 'date'
 
 # auto-patch helper logic
-class Chef::Recipe::AutoPatch
-  WEEKS = %w(first second third fourth)
-  WEEKDAYS = %w(sunday monday tuesday wednesday thursday friday saturday)
+# Chef class
+class Chef
+  # Chef::Recipe class
+  class Recipe
+    # Chef::Recipe::AutoPatch class
+    class AutoPatch
+      WEEKS = %w(first second third fourth)
+      WEEKDAYS = %w(sunday monday tuesday wednesday thursday friday saturday)
 
-  def self.monthly_date(year, month, monthly_specifier)
-    Date.new(year, month, monthly_day(year, month, monthly_specifier))
-  end
-
-  def self.monthly_day(year, month, monthly_specifier)
-    week, weekly_specifier = monthly_specifier.split(' ')
-    week.downcase!
-    weekly_specifier.downcase!
-    Chef::Application.fatal!('Unknown week specified.') unless WEEKS.include?(week)
-
-    first_day_occurance = 1
-    while weekday(weekly_specifier) != Date.new(year, month, first_day_occurance).wday
-      first_day_occurance = first_day_occurance + 1
-    end
-    first_day_occurance + ( WEEKS.index(week) * 7)
-  end
-
-  def self.next_monthly_date(monthly_specifier, hour, minute)
-    current_time = Time.now
-    current_patch_time = Time.new(
-      current_time.year,
-      current_time.month,
-      monthly_day(current_time.year, current_time.month, monthly_specifier),
-      hour,
-      minute
-    )
-
-    if current_time > current_patch_time
-      if current_time.month == 12
-        date = monthly_date(current_time.year + 1, 1, monthly_specifier)
-      else
-        date = monthly_date(current_time.year, current_time.month + 1, monthly_specifier)
+      def self.monthly_date(year, month, monthly_specifier)
+        Date.new(year, month, monthly_day(year, month, monthly_specifier))
       end
-    else
-      date = current_patch_time
+
+      def self.monthly_day(year, month, monthly_specifier)
+        week, weekly_specifier = monthly_specifier.split(' ')
+        week.downcase!
+        weekly_specifier.downcase!
+        Chef::Application.fatal!('Unknown week specified.') unless WEEKS.include?(week)
+
+        first_day_occurance = 1
+        while weekday(weekly_specifier) != Date.new(year, month, first_day_occurance).wday
+          first_day_occurance += 1
+        end
+        first_day_occurance + ( WEEKS.index(week) * 7)
+      end
+
+      def self.next_monthly_date(monthly_specifier, hour, minute)
+        current_time = Time.now
+        current_patch_time = Time.new(
+          current_time.year,
+          current_time.month,
+          monthly_day(current_time.year, current_time.month, monthly_specifier),
+          hour,
+          minute
+        )
+
+        if current_time > current_patch_time
+          if current_time.month == 12
+            date = monthly_date(current_time.year + 1, 1, monthly_specifier)
+          else
+            date = monthly_date(current_time.year, current_time.month + 1, monthly_specifier)
+          end
+        else
+          date = current_patch_time
+        end
+
+        date
+      end
+
+      def self.weekday(weekly_specifier)
+        Chef::Application.fatal!('Unknown weekday specified.') unless WEEKDAYS.include?(weekly_specifier)
+        WEEKDAYS.index(weekly_specifier)
+      end
     end
-
-    date
-  end
-
-  def self.weekday(weekly_specifier)
-    Chef::Application.fatal!('Unknown weekday specified.') unless WEEKDAYS.include?(weekly_specifier)
-    WEEKDAYS.index(weekly_specifier)
   end
 end
