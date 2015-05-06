@@ -24,8 +24,8 @@ class Chef
   class Recipe
     # Chef::Recipe::AutoPatch class
     class AutoPatch
-      WEEKS = %w(first second third fourth)
-      WEEKDAYS = %w(sunday monday tuesday wednesday thursday friday saturday)
+      WEEKS = %w(first second third fourth) unless defined?(WEEKS)
+      WEEKDAYS = %w(sunday monday tuesday wednesday thursday friday saturday) unless defined?(WEEKDAYS)
 
       def self.monthly_date(year, month, monthly_specifier)
         Date.new(year, month, monthly_day(year, month, monthly_specifier))
