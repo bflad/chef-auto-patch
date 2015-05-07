@@ -1,3 +1,7 @@
+## 0.1.10
+
+* Bugfix: #2 check if constants are already defined
+
 ## v0.1.9 ##
 
 * RHEL 5 support with correct package name
